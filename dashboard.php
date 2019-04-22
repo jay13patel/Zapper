@@ -46,9 +46,11 @@
         </div>
     </div>
 	<script>
-		var 
+		var a=0;
 		$("#bt1").click(function() {
 		$(this).toggleClass("bk-clr-one");
+        ledtoggle(a);
+        a=!a;
 		});
 		
 		$("#bt2").click(function() {
