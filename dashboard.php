@@ -50,7 +50,8 @@
 		$("#bt1").click(function() {
 		$(this).toggleClass("bk-clr-one");
         ledtoggle(a);
-        a=!a;
+        if(a==0)a=1;
+        else a=0;
 		});
 		
 		$("#bt2").click(function() {
