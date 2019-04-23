@@ -24,13 +24,11 @@ public final class MQTT  {
     private String clientId;
     private String username; 
     private String password; 
-    private  MemoryPersistence persistence = new MemoryPersistence();
+    private  MemoryPersistence persistence;
     private  MqttClient sampleClient;
     
     public MQTT(String broker,String clientId,String username,String password){
-        setQos(2);
-        setBroker(broker);
-        setClientId(clientId);    
+        this(broker,clientId)  ;
         setPassword(password);
         setUsername(username);
     }
@@ -38,6 +36,7 @@ public final class MQTT  {
         setQos(2);
         setBroker(broker);
         setClientId(clientId);   
+        persistence = new MemoryPersistence();
     }
     
     public void setQos(int qos) {
@@ -52,9 +51,6 @@ public final class MQTT  {
         this.clientId = clientId;
     }
 
-    public void setPersistence(MemoryPersistence persistence) {
-        this.persistence = persistence;
-    }
 
     public void setUsername(String username) {
         this.username = username;
@@ -71,8 +67,8 @@ public final class MQTT  {
             connOpts.setCleanSession(true);
             connOpts.setAutomaticReconnect(true);
             if(username!=null){
-                connOpts.getUserName();
-                connOpts.getPassword();
+                connOpts.setUserName(username);
+                connOpts.setPassword(password.toCharArray());
             }
             System.out.println("Connecting to broker: "+broker);
             sampleClient.connect(connOpts);
